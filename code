@@ -1,0 +1,58 @@
+import pandas as pd
+data = pd.read_csv('Mall_Customers.csv')
+#Display top 5 rows of the Dataset
+data.head()
+#Check last 5 rows of the Dataset
+data.tail()
+#Find shape of our Dataset
+data.shape
+print("Number of Rows",data.shape[0])
+print("Numer of Columns",data.shape[1])
+#Get the information about our Dataset like total number of rows and columns,datatypes of each column and memory requirement
+data.info()
+#Check null values in the Dataset
+data.isnull().sum()
+import matplotlib.pyplot as plt
+plt.plot(range(1,11),wcss)
+plt.title("Elbow Method")
+plt.xlabel("Number of Clusters")
+plt.ylabel("WCSS")
+plt.show()
+X = data[['Annual Income (k$)','Spending Score (1-100)']]
+k_means = KMeans(n_clusters=5,random_state=42)
+y_means = k_means.fit_predict(X)
+y_means
+plt.scatter(X.iloc[y_means==0,0],X.iloc[y_means==0,1],s=100,c='red',label="Cluster 1")
+plt.scatter(X.iloc[y_means==1,0],X.iloc[y_means==1,1],s=100,c='yellow',label="Cluster 2")
+plt.scatter(X.iloc[y_means==2,0],X.iloc[y_means==2,1],s=100,c='green',label="Cluster 3")
+plt.scatter(X.iloc[y_means==3,0],X.iloc[y_means==3,1],s=100,c='blue',label="Cluster 4")
+#Get overall statistics about the Dataset
+data.describe()
+#Kmeans Clustering
+data.columns
+#Model training
+X = data[['Annual Income (k$)','Spending Score (1-100)']]
+from sklearn.cluster import KMeans
+k_means = KMeans()
+k_means.fit(X)
+k_means = KMeans()
+k_means.fit_predict(X)
+#Elbow method to find optimal number of clusters
+wcss=[]
+for i in range(1,11):
+    k_means = KMeans(n_clusters=i)
+    k_means.fit(X)
+    wcss.append(k_means.inertia_)
+plt.scatter(X.iloc[y_means==4,0],X.iloc[y_means==4,1],s=100,c='black',label="Cluster 5")
+plt.scatter(k_means.cluster_centers_[:,0],k_means.cluster_centers_[:,1],s=100,c="magenta")
+plt.title("Customer Segmentation")
+plt.xlabel("Annual Income")
+plt.ylabel("Spending Score")
+plt.legend()
+plt.show()
+k_means.predict([[15,39]])
+#Save the model
+import joblib
+joblib.dump(k_means,"customer_segmentation")
+model = joblib.load("customer_segmentation")
+model.predict([[15,39]])
